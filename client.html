@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+
+function WebSocketTest()
+{
+  if ("WebSocket" in window)
+  {
+     alert("WebSocket is supported by your Browser!");
+     // Let us open a web socket
+     // - Error if use this line
+     //     var ws = new WebSocket("ws://localhost:8080");
+     // - Use this line if the browser would like to communicate with
+     //   the server where client.html is downloaded.
+     //     var ws = new WebSocket("ws://" + location.host, 'echo-protocol');
+     //   Refer Zhomart Mukhamejanov's example
+     // - Websocket allows connection from any source, but first 
+     //   connection should be http request, they call it 
+     //   "Websocket handshake". For example, you can access 
+     //      http://npu-socket.herokuapp.com/
+     //   then it is possible to write like this
+     //       var ws = new WebSocket("wss://npu-socket.herokuapp.com", 'echo-protocol');
+     var ws = new WebSocket("ws://localhost:4000", 'echo-protocol');
+
+     // - The readonly attribute readyState represents the state 
+     //   of the connection. It can have the following values:
+     //   + A value of 0 indicates that the connection has 
+     //     not yet been established.
+     //   + A value of 1 indicates that the connection is 
+     //     established and communication is possible.
+     //   + A value of 2 indicates that the connection is going 
+     //     through the closing handshake.
+     //   + A value of 3 indicates that the connection has been 
+     //     closed or could not be opened.
+     // - The open event occurs when socket connection is established.
+     ws.onopen = function()
+     {
+        // Web Socket is connected, send data using send()
+        ws.send("How are you?");
+        alert("Message is sent...");
+     };
+
+     // The message event occurs when client receives data from server.
+     ws.onmessage = function (evt) 
+     { 
+        var received_msg = evt.data;
+       alert(received_msg);
+     };
+
+     // The close event occurs when connection is closed.
+     ws.onclose = function()
+     { 
+        // websocket is closed.
+        alert("Connection is closed..."); 
+     };
+
+     // The error event occurs when connection is closed.
+     ws.onerror = function()
+     { 
+        // There is erro
+        alert("WebSocket error..."); 
+     };
+  }
+  else
+  {
+     // The browser doesn't support WebSocket
+     alert("WebSocket NOT supported by your Browser!");
+  }
+}
+</script>
+</head>
+<body>
+<div id="sse">
+   <a href="javascript:WebSocketTest()">Run WebSocket</a>
+</div>
+</body>
+</html>
+    
