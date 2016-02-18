@@ -2,6 +2,9 @@
   "name": "homework4",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "4.1.1"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -15,5 +18,4 @@
     "serve-favicon": "~2.3. 0",
     "websocket": "^1.0.22"
   }
-
 }
